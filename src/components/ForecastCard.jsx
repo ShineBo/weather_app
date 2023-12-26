@@ -51,8 +51,8 @@ import { useEffect, useState } from "react"
                             <h3 className="text-2xl">{forecastData.city.name}, {forecastData.city.country}</h3>
                         </div>
                     <h3 className=" text-2xl font-bold">{data.weather[0].main}</h3>
-                    {/* <span>Temp Min : {data.main.temp_min} &#8451;</span><br />
-                    <span>Temp Max : {data.main.temp_max} &#8451;</span> */}
+                    <span>Temp Min : {data.main.temp_min} &#8451;</span><br />
+                    <span>Temp Max : {data.main.temp_max} &#8451;</span>
                     {/* Add more elements to display forecast data */}
                 </div>
         </div>
