@@ -24,9 +24,9 @@ const WeatherCard = ( {errorMsg, weatherData, toDateFunction}) => {
   }, [weatherData]);
 
   return (
-    <div className="mt-2 text-center text-slate-300 border rounded-lg px-8 py-8 
-    shadow-sm shadow-slate-300 border-gray-500 relative bg-slate-500 bg-opacity-20">
-      <h1>Weather Information will be displayed here</h1>
+    <div className="mt-2 mx-7 text-center text-slate-300 border rounded-lg px-8 py-8 
+    shadow-sm shadow-slate-300 border-gray-500  bg-slate-500 bg-opacity-20">
+      {!weatherData && <h1>Weather Information will be displayed here</h1>}
     {errorMsg ? (
       <div className="text-4xl">{errorMsg}</div>
     ) : (
@@ -36,7 +36,7 @@ const WeatherCard = ( {errorMsg, weatherData, toDateFunction}) => {
           <span className="text-2xl">{formattedDate}</span>
           <div className="flex justify-center items-center">
             <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt="" className="" />
-            <div className="text-4xl font-bold leading-normal ">{weatherData.name}</div>
+            <div className="text-4xl font-bold leading-normal ">{weatherData.name}, {weatherData.sys.country}</div>
           </div>
           <div className="text-xl font-semibold">{weatherData.weather[0].description.toUpperCase()}</div>
           <div>Temperature : {weatherData.main.temp} &#8451;</div>

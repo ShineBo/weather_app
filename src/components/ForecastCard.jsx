@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-const ForecastCard = ( {cityName, weatherData, searchButtonClicked}) => {
+    const ForecastCard = ( {cityName, searchButtonClicked}) => {
 
  const [ forecastData, setForecastData ] = useState(null)
  const [ errorForecast, setErrorForecast ] = useState(null)
@@ -8,6 +8,7 @@ const ForecastCard = ( {cityName, weatherData, searchButtonClicked}) => {
  useEffect(() => {
     const fetchForecastData = async () => {
       try {
+        if(searchButtonClicked && cityName) {
         const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=fc5489ee171a6143c326559c1a8bb174&units=metric`);
         const data = await response.json();
         
@@ -19,6 +20,7 @@ const ForecastCard = ( {cityName, weatherData, searchButtonClicked}) => {
           setForecastData(null);
           setErrorForecast("No Data Available");
         }
+      }
       } catch (error) {
         console.error("Error fetching forecast data:", error);
         setForecastData(null);
@@ -26,15 +28,15 @@ const ForecastCard = ( {cityName, weatherData, searchButtonClicked}) => {
       }
     };
 
-    // Fetch data only when the search button is clicked
     if (searchButtonClicked) {
       fetchForecastData();
     }
+
   }, [cityName, searchButtonClicked]);
 
  return (
-    <section className="mt-8 lg:relative text-gray-300">
-      <h3 className="text-center text-4xl leading-normal tracking-wide">Weather Forecast For The Next 5 Days</h3>
+    <section className="mt-8 py-8 relative text-gray-300 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
+      {forecastData && <h3 className="text-center text-4xl leading-normal tracking-wide">Weather Forecast For The Next 5 Days</h3>}
       {errorForecast ? (
         <div className="text-gray-300 text-center">{errorForecast}</div>
       ) : (
@@ -46,11 +48,11 @@ const ForecastCard = ( {cityName, weatherData, searchButtonClicked}) => {
                     <div className="mt-6 px-2 py-2 border border-slate-700 bg-slate-500 bg-opacity-20 rounded-lg">
                         <div className="flex justify-center items-center">
                             <img src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} alt="" />
-                            <h3 className="text-2xl">{forecastData.city.name}</h3>
+                            <h3 className="text-2xl">{forecastData.city.name}, {forecastData.city.country}</h3>
                         </div>
                     <h3 className=" text-2xl font-bold">{data.weather[0].main}</h3>
-                    <span>Temp Min : {data.main.temp_min} &#8451;</span><br />
-                    <span>Temp Max : {data.main.temp_max} &#8451;</span>
+                    {/* <span>Temp Min : {data.main.temp_min} &#8451;</span><br />
+                    <span>Temp Max : {data.main.temp_max} &#8451;</span> */}
                     {/* Add more elements to display forecast data */}
                 </div>
         </div>
