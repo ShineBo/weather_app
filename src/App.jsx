@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import bgimg3 from "./assets/bgimg3.jpg"
 import bgimg from "./assets/bgimg.jpg"
 import WeatherCard from "./components/WeatherCard"
 import ForecastCard from "./components/ForecastCard"
